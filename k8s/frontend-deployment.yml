@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team-track-frontend
+  namespace: team-track
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: team-track-frontend
+  template:
+    metadata:
+      labels:
+        app: team-track-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: agashevishwas/team-track-frontend:v1
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+

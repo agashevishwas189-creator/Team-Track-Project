@@ -1,0 +1,41 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: team-track-backend
+  namespace: team-track
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: team-track-backend
+  template:
+    metadata:
+      labels:
+        app: team-track-backend
+    spec:
+      containers:
+        - name: backend
+          image: agashevishwas/team-track-backend:v1
+          ports:
+            - containerPort: 5000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+
