@@ -16,9 +16,12 @@ spec:
     spec:
       containers:
         - name: backend
-          image: agashevishwas/team-track-backend:v1
+          image: agashevishwas/team-track-backend:v2
           ports:
             - containerPort: 5000
+          envFrom:
+            - secretRef:
+                name: db-secret
           readinessProbe:
             httpGet:
               path: /health

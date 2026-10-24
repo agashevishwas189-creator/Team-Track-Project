@@ -7,7 +7,7 @@ COPY package*.json ./
 
 RUN npm ci --omit=dev
 
-COPY server.js ./
+COPY server.js global-bundle.pem ./
 
 ENV NODE_ENV=production
 ENV PORT=5000
